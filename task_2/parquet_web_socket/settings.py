@@ -1,6 +1,6 @@
 from enum import Enum
 
-from pydantic import BaseSettings, FilePath
+from pydantic import BaseSettings, FilePath, validator
 
 
 class LogLevel(int, Enum):
@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     PARQUET_FILE: FilePath
     PORT: int = 80
     LOG_LEVEL: LogLevel = LogLevel.INFO
+
+    @validator('LOG_LEVEL', pre=True)
+    def validate_log_level(cls, value: str) -> int:
+        return int(value)
 
 
 settings = Settings()

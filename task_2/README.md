@@ -20,9 +20,9 @@ Prerequisites:
 * Poetry >= 1.0.0
 
 Steps:
-* Put parquet file into the `./data` directory
 * Run `poetry shell`
 * Run `poetry install`
+* Put parquet file into the `./data` directory
 * Set `PARQUET_FILE` environment variable to the needed file (e. g. `./data/trades_sample.parquet`)
 * Run `python server.py`
 * Connect to `ws://localhost:{PORT}/ws` with external ws client
