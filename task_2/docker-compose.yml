@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  parquet_web_socket:
+    build:
+      context: .
+    environment:
+      PARQUET_FILE: /app/data/trades_sample.parquet
+      PORT: 80
+      LOG_LEVEL: 20
+    ports:
+      - "4000:80"
+    volumes:
+        - ./data:/app/data

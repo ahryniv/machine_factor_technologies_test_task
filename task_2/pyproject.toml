@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "parquet_web_socket"
+version = "0.1.0"
+description = ""
+authors = ["andri1gryniv <andri1gryniv@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+fastapi = "^0.88.0"
+pyarrow = "^10.0.1"
+uvicorn = "^0.20.0"
+uvloop = "^0.17.0"
+websockets = "^10.4"
+pandas = "^1.5.2"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.991"
+flake8 = "^6.0.0"
+types-setuptools = "^65.6.0"
+pandas-stubs = "^1.5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports="true"
