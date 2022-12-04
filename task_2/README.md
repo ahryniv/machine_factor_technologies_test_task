@@ -10,7 +10,7 @@ Prerequisites:
 
 Steps:
 * Put parquet file into the `./data` directory
-* For the `parquet_web_socket` service in `docker-compose.yml` set `PARQUET_FILE` environment variable to the needed file with the `/app/data` prefix (e. g. `/app/data/trades_sample.parquet`)
+* Set `PARQUET_FILE` environment variable to the needed file in `docker-compose.yml` with the `/app/data` prefix (e. g. `/app/data/trades_sample.parquet`)
 * Run `docker-compose up`
 * Connect to `ws://localhost:4000/ws` with external ws client
 
@@ -25,6 +25,7 @@ Steps:
 * Run `poetry install`
 * Set `PARQUET_FILE` environment variable to the needed file (e. g. `./data/trades_sample.parquet`)
 * Run `python server.py`
+* Connect to `ws://localhost:{PORT}/ws` with external ws client
 
 ## Environment variables
 Alternatively you can set up additional environment variables
