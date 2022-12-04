@@ -4,7 +4,7 @@ WebSocket server which replays historical trade data in chronological order from
 
 ## How to run
 
-### Docker
+## Docker
 Prerequisites:
 * Docker
 
@@ -14,7 +14,7 @@ Steps:
 * Run `docker-compose up`
 * Connect to `ws://localhost:4000/ws` with external ws client
 
-### Local set up
+## Local set up
 Prerequisites:
 * Python >= 3.10
 * Poetry >= 1.0.0
@@ -26,11 +26,11 @@ Steps:
 * Set `PARQUET_FILE` environment variable to the needed file (e. g. `./data/trades_sample.parquet`)
 * Run `python server.py`
 
-#### Environment variables
+## Environment variables
 Alternatively you can set up additional environment variables
 
 | Variable      | Description                    | Default |
 |---------------|--------------------------------|---------|
-| PARQUET_FILE  | Path to the parquet file       |         |
+| PARQUET_FILE  | Path to the parquet file       | -       |
 | PORT          | Server port                    | 80      |
 | LOG_LEVEL     | Log level [10, 20, 30, 40, 50] | 20      |
