@@ -27,6 +27,15 @@ Steps:
 * Run `python server.py`
 * Connect to `ws://localhost:{PORT}/ws` with external ws client
 
+## Run tests
+Prerequisites:
+* Do all steps from "Local set up"
+
+Steps:
+* Run `flake8` - checks code for PEP8
+* Run `mypy parquet_web_socket` - runs static types checker
+* Run `pytest` - runs unit tests
+
 ## Environment variables
 Alternatively you can set up additional environment variables
 

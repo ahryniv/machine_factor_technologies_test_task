@@ -12,7 +12,7 @@ class LogLevel(int, Enum):
 
 
 class Settings(BaseSettings):
-    PARQUET_FILE: FilePath
+    PARQUET_FILE: FilePath = './data/trades_sample.parquet'  # type: ignore
     PORT: int = 80
     LOG_LEVEL: LogLevel = LogLevel.INFO
 
