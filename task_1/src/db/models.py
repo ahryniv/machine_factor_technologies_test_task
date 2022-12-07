@@ -50,6 +50,6 @@ class ErrorLog(BaseModelID):
     __tablename__ = 'error_log'
 
     launch_timestamp: datetime = sa.Column(sa.TIMESTAMP(), nullable=False, default=datetime.utcnow)
-    date: Optional[datetime] = sa.Column(sa.DateTime(), nullable=True)
+    date: date = sa.Column(sa.Date(), nullable=True)
     symbol: Optional[str] = sa.Column(sa.String(), nullable=True)
     message: str = sa.Column(sa.String(), nullable=False)

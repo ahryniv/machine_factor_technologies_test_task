@@ -48,7 +48,7 @@ def upgrade() -> None:
         'error_log',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('launch_timestamp', sa.DateTime(), nullable=False),
-        sa.Column('date', sa.DateTime(), nullable=True),
+        sa.Column('date', sa.Date(), nullable=True),
         sa.Column('symbol', sa.String(), nullable=True),
         sa.Column('message', sa.String(), nullable=False),
         sa.PrimaryKeyConstraint('id')
