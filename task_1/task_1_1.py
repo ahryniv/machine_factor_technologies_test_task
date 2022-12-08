@@ -18,7 +18,7 @@ def get_more_than_avg_40_rows(conn: 'Connection', year: int) -> Optional[Decimal
     query = text('''
         SELECT COUNT(sub2.more_than_prev_40_avg)::float / COUNT(*)::float * 100 as percents
         FROM (
-            SELECT distinct on (sub.symbol) 
+            SELECT distinct on (sub.symbol)
                 sub.symbol,
                 more_than_prev_40_avg
             FROM (
