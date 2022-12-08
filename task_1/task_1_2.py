@@ -1,15 +1,16 @@
 """NOT FINISHED.
-
-I didn't find a way how to analyse batch of 20000 rows in 30 seconds.
+This solution is not working correctly.
+I didn't find a proper way how to analyze the part with min of 10 records from bars_1 table and do it efficiently
 """
 
 
+from datetime import date
 from decimal import Decimal
 import logging
 from time import time
-from typing import TYPE_CHECKING, List, Optional, Set
+from typing import TYPE_CHECKING, Dict, List, Optional, Set, Tuple
 
-from sqlalchemy import select, distinct, delete
+from sqlalchemy import select, distinct, delete, over, func
 
 from src.conf.logger import init_logging
 from src.db.models import Bars2, Bars1, ErrorLog
@@ -52,6 +53,7 @@ class Worker:
         self._rows: List[Bars2] = []
         self._rows_ids: List[int] = []
         self._errors = Errors(db_session)
+        self._bars_1: Dict[Tuple[str, date], Decimal] = {}
 
     def run(self) -> None:
         """Run the analysis for next batch of rows"""
@@ -90,10 +92,35 @@ class Worker:
         """Prepare and cache data that is needed for further calculations"""
         self._bars_1_symbols = self._get_bars_1_symbols()
         self._rows = self._get_next_rows()
+        self._bars_1 = self._get_bars_1_min_10_days()
 
-    def _get_min_for_last_n_days(self, row: Bars2, days: int = 10) -> Decimal:
-        """TODO: Finish"""
-        return Decimal()
+    def _get_bars_1_min_10_days(self) -> Dict[Tuple[str, date], Decimal]:
+        """Get records from bars_1 table with minimal close price of last 10 days.
+
+        Saved in dictionary to have O(1) search time by symbol and date
+        """
+        query = (
+            db_session.query(
+                Bars1.symbol,
+                Bars1.date,
+                Bars1.close,
+                over(func.min(Bars1.close),
+                     order_by=Bars1.date,
+                     partition_by=Bars1.symbol,
+                     rows=(-5, 0)).label('min_last_10_days'),
+            )
+        )
+
+        rows = self.db_session.execute(query).fetchall()
+        res = {}
+        for row in rows:
+            res[(row.symbol, row.date)] = row.min_last_10_days
+        self._counter = 0
+        return res
+
+    def _get_min_for_last_n_days(self, row: Bars2) -> Decimal:
+        """Get minimal close price for last 10 days for symbol from bars_1 table"""
+        return self._bars_1.get((row.symbol, row.date), Decimal())
 
     def _delete_rows(self) -> None:
         """Delete rows after analysis"""

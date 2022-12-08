@@ -1,7 +1,7 @@
 """Add bars_1, bars_2 and error_log tables
 
 Revision ID: 545290734080
-Revises: 
+Revises:
 Create Date: 2022-12-01 22:52:46.323673
 
 """
