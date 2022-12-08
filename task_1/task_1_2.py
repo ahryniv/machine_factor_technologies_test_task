@@ -100,7 +100,7 @@ class Worker:
         Saved in dictionary to have O(1) search time by symbol and date
         """
         query = (
-            db_session.query(
+            select(
                 Bars1.symbol,
                 Bars1.date,
                 Bars1.close,

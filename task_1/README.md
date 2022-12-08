@@ -11,6 +11,9 @@ Prerequisites:
 Steps:
 * Run `docker-compose up`
 
+#### PGAdmin
+With docker-compose PGAdmin is also run. After all is set up it will be on port 5050.
+
 ## Local set up
 Prerequisites:
 * Python >= 3.10
