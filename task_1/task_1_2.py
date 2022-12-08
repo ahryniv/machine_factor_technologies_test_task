@@ -83,7 +83,7 @@ class Worker:
             self._errors.add(row, Errors.SYMBOL_NOT_PRESENT.format(symbol=row.symbol, date=row.date))
 
         min_last_10_days = self._get_min_for_last_n_days(row)
-        if not min_last_10_days.is_nan() and row.close and row.close > min_last_10_days:
+        if row.close and row.close > min_last_10_days:
             self._add_bars_1.append(Bars1.from_bars_2(row))
         else:
             self._errors.add(row, Errors.NOT_BIGGER_THAN_MINIMUM.format(symbol=row.symbol, date=row.date))
