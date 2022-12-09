@@ -32,8 +32,8 @@ COPY --from=dependencies /usr/local/lib/python3.10/site-packages/ /usr/local/lib
 COPY --from=dependencies /usr/local/bin/ /usr/local/bin/
 WORKDIR /app
 COPY src ./src
-COPY task_1_1.py ./task_1_1.py
-COPY task_1_2.py ./task_1_2.py
+COPY run_task_1_1.py ./run_task_1_1.py
+COPY run_task_1_2.py ./run_task_1_2.py
 COPY alembic.ini ./alembic.ini
 COPY src/scripts/cron-docker-entrypoint.sh ./cron-docker-entrypoint.sh
 RUN chmod +x ./cron-docker-entrypoint.sh

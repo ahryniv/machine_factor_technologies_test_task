@@ -1,8 +1,9 @@
 """NOT FINISHED.
 This solution is not working correctly.
-I didn't find a proper way how to analyze the part with min of 10 records from bars_1 table and do it efficiently
-"""
 
+I didn't find a proper way how to analyze the part with min of 10 records from bars_1 table
+and do it efficiently to fit into 30 seconds.
+"""
 
 from datetime import date
 from decimal import Decimal
@@ -12,15 +13,12 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Set, Tuple
 
 from sqlalchemy import select, distinct, delete, over, func
 
-from src.conf.logger import init_logging
 from src.db.models import Bars2, Bars1, ErrorLog
-from src.db.config import DBSession
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
-BATCH_COUNT = 20_000
 
 
 class Errors:
@@ -137,14 +135,6 @@ class Worker:
 
     def _get_next_rows(self) -> List[Bars2]:
         """Get next batch of rows from the table"""
-        query = select(Bars2).limit(BATCH_COUNT)
+        query = select(Bars2).limit(self.batch_count)
         result = self.db_session.execute(query)
         return result.scalars().fetchall()
-
-
-if __name__ == '__main__':
-    init_logging()
-
-    with DBSession() as db_session:
-        worker = Worker(BATCH_COUNT, db_session)
-        worker.run()

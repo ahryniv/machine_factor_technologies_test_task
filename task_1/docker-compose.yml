@@ -56,7 +56,7 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-    command: "python task_1_1.py"
+    command: "python run_task_1_1.py"
 
   task_1_2_cron_worker:
     build:

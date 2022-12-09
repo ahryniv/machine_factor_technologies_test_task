@@ -1,6 +1,6 @@
 # Task 1
 
-# !!!!! TASK 1.2 IS NOT COMPLETED.
+## TASK 1.2 IS NOT FULLY COMPLETED.
 
 ## How to run
 
